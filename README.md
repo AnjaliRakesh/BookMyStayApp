@@ -89,3 +89,15 @@ The system is developed incrementally through multiple use cases, each introduci
 - Decouples request intake from allocation
 - Ensures fairness during peak demand
 - Does not alter room availability
+### UC6 — Reservation Confirmation & Room Allocation
+
+**Goal:** Confirm booking requests by assigning rooms safely while maintaining inventory consistency.
+
+**Features:**
+- Processes booking requests from the queue in FIFO order
+- Checks room availability before allocation
+- Generates unique room IDs for each reservation
+- Prevents duplicate assignments using a Set
+- Maps room types to allocated room IDs
+- Updates inventory immediately after allocation
+- Ensures system consistency and prevents double-booking
