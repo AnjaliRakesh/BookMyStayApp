@@ -1,46 +1,86 @@
-import java.util.Scanner;
-
 public class BookMyStayApp {
 
     public static void main(String[] args) {
 
-        // UC1 — Welcome Message
+        // ================= UC1 =================
+        // Application Entry & Welcome Message
+
         System.out.println("=================================");
         System.out.println("       BOOK MY STAY APP          ");
         System.out.println("   Hotel Booking Management      ");
-        System.out.println("           Version 1.0           ");
+        System.out.println("           Version 2.0           ");
         System.out.println("=================================");
 
         System.out.println("Application Started Successfully!");
 
-        // UC2 — Menu + Input
-        Scanner scanner = new Scanner(System.in);
+        // ================= UC2 =================
+        // Basic Room Types & Static Availability
 
-        System.out.println("\n1. Search Hotels");
-        System.out.println("2. Book Room");
-        System.out.println("3. Cancel Booking");
-        System.out.println("4. Exit");
+        Room single = new SingleRoom();
+        Room dbl = new DoubleRoom();
+        Room suite = new SuiteRoom();
 
-        System.out.print("Enter your choice: ");
-        int choice = scanner.nextInt();
+        // Static availability variables
+        int singleAvailable = 10;
+        int doubleAvailable = 5;
+        int suiteAvailable = 2;
 
-        switch (choice) {
-            case 1:
-                System.out.println("Searching hotels...");
-                break;
-            case 2:
-                System.out.println("Room booking selected.");
-                break;
-            case 3:
-                System.out.println("Booking cancellation selected.");
-                break;
-            case 4:
-                System.out.println("Exiting application...");
-                break;
-            default:
-                System.out.println("Invalid choice.");
-        }
+        System.out.println("\nRoom Details & Availability:");
 
-        scanner.close();
+        single.displayDetails();
+        System.out.println("Available: " + singleAvailable);
+
+        dbl.displayDetails();
+        System.out.println("Available: " + doubleAvailable);
+
+        suite.displayDetails();
+        System.out.println("Available: " + suiteAvailable);
+    }
+}
+
+
+// ==================================================
+// Abstract Room Class
+// ==================================================
+
+abstract class Room {
+
+    protected int beds;
+    protected double price;
+    protected String type;
+
+    public Room(String type, int beds, double price) {
+        this.type = type;
+        this.beds = beds;
+        this.price = price;
+    }
+
+    public void displayDetails() {
+        System.out.println("\nRoom Type: " + type);
+        System.out.println("Beds: " + beds);
+        System.out.println("Price: ₹" + price);
+    }
+}
+
+
+// ==================================================
+// Concrete Room Types
+// ==================================================
+
+class SingleRoom extends Room {
+    public SingleRoom() {
+        super("Single Room", 1, 2000);
+    }
+}
+
+class DoubleRoom extends Room {
+    public DoubleRoom() {
+        super("Double Room", 2, 3500);
+    }
+}
+
+class SuiteRoom extends Room {
+    public SuiteRoom() {
+        super("Suite Room", 3, 6000);
     }
 }
