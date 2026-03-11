@@ -5,12 +5,10 @@ public class BookMyStayApp {
     public static void main(String[] args) {
 
         // ================= UC1 =================
-        // Application Entry & Welcome Message
-
         System.out.println("=================================");
         System.out.println("       BOOK MY STAY APP          ");
         System.out.println("   Hotel Booking Management      ");
-        System.out.println("           Version 3.0           ");
+        System.out.println("           Version 4.0           ");
         System.out.println("=================================");
 
         System.out.println("Application Started Successfully!");
@@ -25,7 +23,7 @@ public class BookMyStayApp {
 
 
         // ================= UC3 =================
-        // Centralized Inventory using HashMap
+        // Centralized Inventory (HashMap)
 
         RoomInventory inventory = new RoomInventory();
 
@@ -40,8 +38,26 @@ public class BookMyStayApp {
         suite.displayDetails();
         System.out.println("Available: " + inventory.getAvailability("Suite"));
 
-        // Show complete inventory
         inventory.displayInventory();
+
+
+        // ================= UC4 =================
+        // Room Search & Availability Check (READ-ONLY)
+
+        System.out.println("\nAvailable Rooms for Booking:");
+
+        Room[] rooms = { single, dbl, suite };
+
+        for (Room room : rooms) {
+
+            String key = room.getTypeKey();
+            int available = inventory.getAvailability(key);
+
+            if (available > 0) {   // Show only available rooms
+                room.displayDetails();
+                System.out.println("Available: " + available);
+            }
+        }
     }
 }
 
@@ -66,6 +82,13 @@ abstract class Room {
         System.out.println("\nRoom Type: " + type);
         System.out.println("Beds: " + beds);
         System.out.println("Price: ₹" + price);
+    }
+
+    // Used by UC4 search logic
+    public String getTypeKey() {
+        if (type.contains("Single")) return "Single";
+        if (type.contains("Double")) return "Double";
+        return "Suite";
     }
 }
 
@@ -94,14 +117,13 @@ class SuiteRoom extends Room {
 
 
 // ==================================================
-// UC3 — Centralized Room Inventory (HashMap)
+// UC3 — Centralized Room Inventory
 // ==================================================
 
 class RoomInventory {
 
     private HashMap<String, Integer> inventory;
 
-    // Constructor initializes availability
     public RoomInventory() {
 
         inventory = new HashMap<>();
@@ -111,17 +133,14 @@ class RoomInventory {
         inventory.put("Suite", 2);
     }
 
-    // Get availability
     public int getAvailability(String roomType) {
         return inventory.getOrDefault(roomType, 0);
     }
 
-    // Update availability
     public void updateAvailability(String roomType, int count) {
         inventory.put(roomType, count);
     }
 
-    // Display all inventory
     public void displayInventory() {
 
         System.out.println("\nCurrent Inventory:");
