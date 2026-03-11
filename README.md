@@ -78,3 +78,14 @@ The system is developed incrementally through multiple use cases, each introduci
 - Implements read-only search logic
 - Filters out unavailable room types
 - Maintains separation between search and booking operations
+### UC5 — Booking Request
+
+**Goal:** Collect booking requests fairly using a queue structure without modifying inventory.
+
+**Features:**
+- Accepts booking requests from guests
+- Stores requests using a FIFO queue
+- Preserves arrival order
+- Decouples request intake from allocation
+- Ensures fairness during peak demand
+- Does not alter room availability
