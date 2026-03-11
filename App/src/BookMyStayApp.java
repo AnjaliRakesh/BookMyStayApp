@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 public class BookMyStayApp {
 
     public static void main(String[] args) {
@@ -8,39 +10,44 @@ public class BookMyStayApp {
         System.out.println("=================================");
         System.out.println("       BOOK MY STAY APP          ");
         System.out.println("   Hotel Booking Management      ");
-        System.out.println("           Version 2.0           ");
+        System.out.println("           Version 3.0           ");
         System.out.println("=================================");
 
         System.out.println("Application Started Successfully!");
 
+
         // ================= UC2 =================
-        // Basic Room Types & Static Availability
+        // Room Initialization (OOP)
 
         Room single = new SingleRoom();
         Room dbl = new DoubleRoom();
         Room suite = new SuiteRoom();
 
-        // Static availability variables
-        int singleAvailable = 10;
-        int doubleAvailable = 5;
-        int suiteAvailable = 2;
+
+        // ================= UC3 =================
+        // Centralized Inventory using HashMap
+
+        RoomInventory inventory = new RoomInventory();
 
         System.out.println("\nRoom Details & Availability:");
 
         single.displayDetails();
-        System.out.println("Available: " + singleAvailable);
+        System.out.println("Available: " + inventory.getAvailability("Single"));
 
         dbl.displayDetails();
-        System.out.println("Available: " + doubleAvailable);
+        System.out.println("Available: " + inventory.getAvailability("Double"));
 
         suite.displayDetails();
-        System.out.println("Available: " + suiteAvailable);
+        System.out.println("Available: " + inventory.getAvailability("Suite"));
+
+        // Show complete inventory
+        inventory.displayInventory();
     }
 }
 
 
 // ==================================================
-// Abstract Room Class
+// UC2 — Abstract Room Class
 // ==================================================
 
 abstract class Room {
@@ -64,7 +71,7 @@ abstract class Room {
 
 
 // ==================================================
-// Concrete Room Types
+// UC2 — Concrete Room Types
 // ==================================================
 
 class SingleRoom extends Room {
@@ -82,5 +89,45 @@ class DoubleRoom extends Room {
 class SuiteRoom extends Room {
     public SuiteRoom() {
         super("Suite Room", 3, 6000);
+    }
+}
+
+
+// ==================================================
+// UC3 — Centralized Room Inventory (HashMap)
+// ==================================================
+
+class RoomInventory {
+
+    private HashMap<String, Integer> inventory;
+
+    // Constructor initializes availability
+    public RoomInventory() {
+
+        inventory = new HashMap<>();
+
+        inventory.put("Single", 10);
+        inventory.put("Double", 5);
+        inventory.put("Suite", 2);
+    }
+
+    // Get availability
+    public int getAvailability(String roomType) {
+        return inventory.getOrDefault(roomType, 0);
+    }
+
+    // Update availability
+    public void updateAvailability(String roomType, int count) {
+        inventory.put(roomType, count);
+    }
+
+    // Display all inventory
+    public void displayInventory() {
+
+        System.out.println("\nCurrent Inventory:");
+
+        for (String type : inventory.keySet()) {
+            System.out.println(type + " Rooms Available: " + inventory.get(type));
+        }
     }
 }
