@@ -144,3 +144,14 @@ The system is developed incrementally through multiple use cases, each introduci
 - Prevents duplicate or invalid cancellation attempts
 - Updates booking history to reflect cancellations
 - Ensures consistent system recovery behavior
+### UC11 — Concurrent Booking Simulation
+
+**Goal:** Demonstrate safe handling of concurrent booking requests using multi-threading and synchronization.
+
+**Features:**
+- Simulates multiple guests submitting requests simultaneously
+- Uses shared booking queue and inventory
+- Processes requests using multiple threads
+- Protects critical sections with synchronized access
+- Prevents race conditions and double allocation
+- Maintains consistent system state under concurrent load
