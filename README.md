@@ -111,3 +111,14 @@ The system is developed incrementally through multiple use cases, each introduci
 - Calculates total additional cost
 - Maintains separation from booking and inventory logic
 - Supports easy addition of new service types
+### UC8 — Booking History & Reporting
+
+**Goal:** Track confirmed bookings and generate operational reports.
+
+**Features:**
+- Stores confirmed reservations in chronological order
+- Maintains booking history using a List
+- Supports retrieval for administrative review
+- Generates summary reports from stored data
+- Separates storage and reporting responsibilities
+- Provides audit-ready historical records
