@@ -122,3 +122,14 @@ The system is developed incrementally through multiple use cases, each introduci
 - Generates summary reports from stored data
 - Separates storage and reporting responsibilities
 - Provides audit-ready historical records
+### UC9 — Error Handling & Validation
+
+**Goal:** Improve system reliability through validation and structured error handling.
+
+**Features:**
+- Validates room types before processing bookings
+- Prevents inventory from reaching invalid states
+- Uses custom exceptions for invalid scenarios
+- Implements fail-fast design
+- Displays clear failure messages
+- Ensures system stability after errors
