@@ -133,3 +133,14 @@ The system is developed incrementally through multiple use cases, each introduci
 - Implements fail-fast design
 - Displays clear failure messages
 - Ensures system stability after errors
+### UC10 — Booking Cancellation & Inventory Rollback
+
+**Goal:** Safely cancel confirmed bookings while restoring system state.
+
+**Features:**
+- Validates reservation existence before cancellation
+- Uses a stack to track released room IDs (LIFO rollback)
+- Restores inventory counts immediately
+- Prevents duplicate or invalid cancellation attempts
+- Updates booking history to reflect cancellations
+- Ensures consistent system recovery behavior
