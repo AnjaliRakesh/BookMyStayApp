@@ -155,3 +155,14 @@ The system is developed incrementally through multiple use cases, each introduci
 - Protects critical sections with synchronized access
 - Prevents race conditions and double allocation
 - Maintains consistent system state under concurrent load
+### UC12 — Data Persistence & System Recovery
+
+**Goal:** Preserve system state across application restarts using file-based persistence.
+
+**Features:**
+- Saves booking history and inventory to a file
+- Restores state during application startup
+- Uses object serialization and deserialization
+- Maintains system continuity after restart
+- Handles missing or corrupted data safely
+- Demonstrates durable system design concepts
