@@ -101,3 +101,13 @@ The system is developed incrementally through multiple use cases, each introduci
 - Maps room types to allocated room IDs
 - Updates inventory immediately after allocation
 - Ensures system consistency and prevents double-booking
+### UC7 — Add-On Service Selection
+
+**Goal:** Support optional services for existing reservations without altering core booking logic.
+
+**Features:**
+- Allows multiple services per reservation
+- Uses a map from reservation ID to list of services
+- Calculates total additional cost
+- Maintains separation from booking and inventory logic
+- Supports easy addition of new service types
